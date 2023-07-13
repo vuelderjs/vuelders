@@ -1,0 +1,59 @@
+scalar Date
+
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    completeName: String
+    dateBirth: Date
+    phone: String
+    role: String #cambiar por Role type
+}
+
+type Query {
+    userFindById(id: ID!): User
+    userFetch: [User]
+    userPaginate(input: PaginateInput): [User]
+    loguinUser(input: LoginInput): String
+}
+
+type Mutation {
+    userUpdate(id: ID!, upgrade: UserInput): User
+    userDeleteById(id: ID!): User
+    userCreateOne(input: UserInput): User
+}
+
+input LoginInput {
+    username: String
+    email: String
+    password: String!
+}
+
+input PaginateInput {
+    pageNumber: Int
+    itemsPerPage: Int
+    search: String
+    filters: [FilterInput]
+    orderBy: String
+    orderDesc: Boolean
+}
+
+input FilterInput {
+    id: ID
+    username: String
+    email: String
+    completeName: String
+    dateBirth: Date
+    phone: String
+    role: String
+}
+
+input UserInput {
+    username: String!
+    email: String!
+    password: String!
+    completeName: String
+    dateBirth: Date
+    phone: String
+    role: String
+}

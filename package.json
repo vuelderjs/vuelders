@@ -1,0 +1,29 @@
+{
+  "name": "vuelderjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": false,
+  "workspaces": [
+    "packages/authorization/*",
+    "packages/common/*",
+    "packages/z/apps/*"
+  ],
+  "config": {
+    "sui-mono": {
+      "access": "public"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "sui-mono commit",
+    "check": "sui-mono check",
+    "release": "sui-mono release"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@s-ui/mono": "^2.35.0"
+  }
+}
