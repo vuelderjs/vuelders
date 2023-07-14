@@ -10,6 +10,8 @@ import {ADMIN, PREMIUM_USER, COMMON_USER} from './roles/index.js'
 
 const Roles = {ADMIN, PREMIUM_USER, COMMON_USER}
 
+//example fix
+
 import {
     userFindService, 
     userFindOneService, 
