@@ -16,8 +16,8 @@
     "nodemon": "^1.14.9"
   },
   "dependencies": {
-    "@vuelders/common-backend": "1.0.0",
-    "@vuelders/authorization-backend": "1.0.0",
+    "@vuelder.js/common-backend": "1.0.0",
+    "@vuelder.js/authorization-backend": "1.0.0",
     "@apollo/server": "^4.7.5",
     "@graphql-tools/load-files": "^7.0.0",
     "@graphql-tools/merge": "^9.0.0",

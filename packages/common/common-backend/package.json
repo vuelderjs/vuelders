@@ -1,5 +1,5 @@
 {
-  "name": "@vuelders/common-backend",
+  "name": "@vuelder.js/common-backend",
   "version": "1.0.0",
   "description": "Common utilities for vuelders modules",
   "main": "src/index.js",
