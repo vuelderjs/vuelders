@@ -109,7 +109,7 @@ test('Base Repository testing', async (t) => {
 
     // Tests that create saves the document to the database and returns it
     await t.test('test_create', async () => {
-        class Model {
+        class Model{
             constructor({name}){
                 this.name = name
             }
