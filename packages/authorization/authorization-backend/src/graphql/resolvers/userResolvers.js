@@ -1,6 +1,6 @@
 import { GraphQLScalarType } from "graphql";
 
-import { BaseMutations, BaseQueries } from "@vuelders/common-backend";
+import { BaseMutations, BaseQueries, InternalServerError } from "@vuelder.js/common-backend";
 
 import {
     userFindByIdService as findByIdService,
@@ -27,7 +27,12 @@ class UserQueries extends BaseQueries{
     }
     
     async loguinUser(_, {input: {email = null, username = null, password = null } }){
-        return await loguinUserService({email, username, password})
+        try {
+            return await loguinUserService({email, username, password})
+        } catch (error) {
+            if(!(error instanceof InternalServerError)) throw error
+            throw new InternalServerError({message: error.message, save: true})
+        }
     }
 }
 

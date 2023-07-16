@@ -1,0 +1,25 @@
+type Role {
+    id: ID!
+    name: String!
+    permissions: [Permission]
+}
+
+type Permission {
+    id: ID!
+    name: String!
+}
+
+type Query {
+    fetchRoles: [Role]
+    fetchPermissions: [Permission]
+    findRoleById(id: ID!): Role
+    findPermissionById(id: ID!): Permission
+}
+
+type Mutation {
+    createRole(role: String!): Role
+    assignPermissionToRole(permission: String!, role: String!): Role
+    unassignPermissionToRole(permission: String!, role: String!): Role
+    assignRoleToUser(role: String!, username: String!): User
+    deleteRole(role: String!): Role
+}
