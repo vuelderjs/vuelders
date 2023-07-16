@@ -13,9 +13,9 @@ class BaseRepository{
         if(!BaseRepository.#Model || !BaseRepository.#Model.findById) throw new Error('Invalid Model.')
         let docFindedById = BaseRepository.#Model.findById(id)
         for(let i = 0; i < BaseRepository.#populate.length; i++){
-            docFindedById = await docFindedById.populate(BaseRepository.#populate[i])
+            docFindedById = docFindedById.populate(BaseRepository.#populate[i])
         }
-        return BaseRepository.#populate.length == 0 ? await docFindedById : docFindedById
+        return await docFindedById
     }
 
     async find(query){
@@ -23,39 +23,47 @@ class BaseRepository{
         for(let i = 0; i < BaseRepository.#populate.length; i++){
             docFetch = docFetch.populate(BaseRepository.#populate[i])
         }
-        return BaseRepository.#populate.length == 0 ? await docFetch : docFetch
+        return await docFetch
     }
 
     async findOne(query){
         let doc = BaseRepository.#Model.findOne(query)
         for(let i = 0; i < BaseRepository.#populate.length; i++){
-            doc = await doc.populate(BaseRepository.#populate[i])
+            doc = doc.populate(BaseRepository.#populate[i])
         }
-        return BaseRepository.#populate.length == 0 ? await doc : doc
+        return await doc
     }
 
     async findByIdAndDelete(id){
         let docDeleted = BaseRepository.#Model.findByIdAndDelete(id)
         for(let i = 0; i < BaseRepository.#populate.length; i++){
-            docDeleted = await docDeleted.populate(BaseRepository.#populate[i])
+            docDeleted = docDeleted.populate(BaseRepository.#populate[i])
         }
-        return BaseRepository.#populate.length == 0 ? await docDeleted : docDeleted
+        return await docDeleted
     }
 
     async findByIdAndUpdate(id, upgrade){
         let updatedDoc = BaseRepository.#Model.findByIdAndUpdate(id, upgrade, {new: true})
         for(let i = 0; i < BaseRepository.#populate.length; i++){
-            updatedDoc = await updatedDoc.populate(BaseRepository.#populate[i])
+            updatedDoc = updatedDoc.populate(BaseRepository.#populate[i])
         }
-        return BaseRepository.#populate.length == 0 ? await updatedDoc : updatedDoc
+        return await updatedDoc
     }
 
     async paginate(query, options){
-        let paginateDocs = BaseRepository.#Model.paginate(query, options)
-        for(let i = 0; i < BaseRepository.#populate.length; i++){
-            paginateDocs = await paginateDocs.populate(BaseRepository.#populate[i])
+        options.populate = BaseRepository.#populate
+
+        const paginate = await BaseRepository.#Model.paginate(query, options)
+
+        return {
+            docs: paginate.docs,
+            totalDocs: paginate.totalDocs,
+            limit: paginate.limit,
+            totalPages: paginate.totalPages,
+            page: paginate.page,
+            hasPrevPage: paginate.hasPrevPage,
+            hasNextPage: paginate.hasNextPage
         }
-        return BaseRepository.#populate.length == 0 ? await paginateDocs : paginateDocs
     }
 
     async create(doc){
