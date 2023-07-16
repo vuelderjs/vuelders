@@ -1,6 +1,6 @@
 {
   "name": "@vuelder.js/common-backend",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Common utilities for vuelders modules",
   "main": "src/index.js",
   "type": "module",
