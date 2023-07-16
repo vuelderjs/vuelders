@@ -9,18 +9,33 @@ class BaseQueries{
         BaseQueries.#name = name
         
         this[`${BaseQueries.#name}FindById`] = async (_, {id}, req) => {
-            if(middlewares && middlewares.findByIdMiddleware) await middlewares.findByIdMiddleware(req)
-            return await findByIdService(id)
+            try {
+                if(middlewares && middlewares.findByIdMiddleware) await middlewares.findByIdMiddleware(req)
+                return await findByIdService(id)
+            } catch (error) {
+                if(!(error instanceof InternalServerError)) throw error
+                throw new InternalServerError({message: error.message, save: true})
+            }
         }
 
         this[`${BaseQueries.#name}Fetch`] = async (_, __, req) => {
-            if(middlewares && middlewares.fetchMiddleware) await middlewares.fetchMiddleware(req)
-            return await fetchService()
+            try {
+                if(middlewares && middlewares.fetchMiddleware) await middlewares.fetchMiddleware(req)
+                return await fetchService()
+            } catch (error) {
+                if(!(error instanceof InternalServerError)) throw error
+                throw new InternalServerError({message: error.message, save: true})
+            }
         }
 
         this[`${BaseQueries.#name}Paginate`] = async (_, {input}, req) => {
-            if(middlewares && middlewares.paginateMiddleware) await middlewares.paginateMiddleware(req)
-            return await paginateService(input)
+            try {
+                if(middlewares && middlewares.paginateMiddleware) await middlewares.paginateMiddleware(req)
+                return await paginateService(input)
+            } catch (error) {
+                if(!(error instanceof InternalServerError)) throw error
+                throw new InternalServerError({message: error.message, save: true})
+            }
         }
     }
 
@@ -40,18 +55,33 @@ class BaseMutations{
         BaseMutations.#name = name
         
         this[`${BaseMutations.#name}CreateOne`] = async (_, {input}, req) => {
-            if(middlewares && middlewares.createOneMiddleware) await middlewares.createOneMiddleware(req)
-            return await createOneService(input)
+            try {
+                if(middlewares && middlewares.createOneMiddleware) await middlewares.createOneMiddleware(req)
+                return await createOneService(input)
+            } catch (error) {
+                if(!(error instanceof InternalServerError)) throw error
+                throw new InternalServerError({message: error.message, save: true})
+            }
         }
 
         this[`${BaseMutations.#name}Update`] = async (_,{id, upgrade}, req) => {
-            if(middlewares && middlewares.updateMiddleware) await middlewares.updateMiddleware(req)
-            return await updateService(id, upgrade)
+            try {
+                if(middlewares && middlewares.updateMiddleware) await middlewares.updateMiddleware(req)
+                return await updateService(id, upgrade)
+            } catch (error) {
+                if(!(error instanceof InternalServerError)) throw error
+                throw new InternalServerError({message: error.message, save: true})
+            }
         }
 
         this[`${BaseMutations.#name}DeleteById`] = async (_, {id}, req) => {
-            if(middlewares && middlewares.deleteByIdMiddleware) await middlewares.deleteByIdMiddleware(req)
-            return await deleteByIdService(id)
+            try {
+                if(middlewares && middlewares.deleteByIdMiddleware) await middlewares.deleteByIdMiddleware(req)
+                return await deleteByIdService(id)
+            } catch (error) {
+                if(!(error instanceof InternalServerError)) throw error
+                throw new InternalServerError({message: error.message, save: true})
+            }
         }
     }
 
