@@ -39,10 +39,6 @@ class BaseService {
                 query.value = { $regex: search, $options: 'i'  }
             }
     
-            if (filters){
-                query = BaseService.#filters(query, filters)
-            }
-    
             return await BaseService.#repository.paginate(query, options)
         } catch (error) {
             throw error
@@ -75,7 +71,7 @@ class BaseService {
 
     async createOne(doc){
         try {
-            return await BaseService.#repository.createOne(doc)
+            return await BaseService.#repository.create(doc)
         } catch (error) {
             throw error
         }
