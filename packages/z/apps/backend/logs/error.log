@@ -1,0 +1,1 @@
+2023-07-15 22:15:59 error: Connection to Mongo error: TypeError: Cannot create property 'Symbol(level)' on string 'Mongoose connected'

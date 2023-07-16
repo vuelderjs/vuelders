@@ -74,7 +74,7 @@ class GraphqlServer {
       express.json(),
       expressMiddleware(GraphqlServer.server, {
         context: async ({req}) => ({
-          token: req.headers.token
+          token: req.headers.authorization
         })
       })
     )
