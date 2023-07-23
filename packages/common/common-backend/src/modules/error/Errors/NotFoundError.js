@@ -4,18 +4,17 @@ class NotFoundError extends Error {
     constructor({message, author, save = false}) {
         super(message)
         this.name = "NotFoundError"
-        this.code = "NOT_FOUND_ERROR"
+        this.errorCode = "NOT_FOUND_ERROR"
+        this.statusCode = 404
         this.author = author ? author : 'non-author'
-        this.message = JSON.stringify({
-            status: 404,
-            code: "NOT_FOUND_ERROR",
-            message: message
-        })
+        this.message = message
         if(save) this.save()
     }
 
     save(){
         errorCreateOneService({
+            statusCode: this.statusCode,
+            errorCode: this.errorCode,
             author: this.author,
             name: this.name,
             stack: this.stack,

@@ -27,7 +27,6 @@ import {
 
 import {
     userFindService, 
-    userFindOneService, 
     userFindByIdService, 
     userPaginateService, 
     userFetchService, 
@@ -35,7 +34,7 @@ import {
     userDeleteByIdService,
     userCreateOneService,
     getPermissionsFromUserToken,
-    loguinUserService } from './services/UserServices.js'
+    loginUserService } from './services/UserServices.js'
 
 import {
     findRoleByName,
@@ -85,7 +84,6 @@ export {
 
     // SERVICES
     userFindService, 
-    userFindOneService, 
     userFindByIdService, 
     userPaginateService, 
     userFetchService, 
@@ -93,7 +91,7 @@ export {
     userDeleteByIdService,
     userCreateOneService,
     getPermissionsFromUserToken,
-    loguinUserService,
+    loginUserService,
 
     findRoleByName,
     fetchRoles,

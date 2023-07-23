@@ -4,18 +4,17 @@ class ForbiddenError extends Error {
     constructor({message, author, save = false}) {
         super(message)
         this.name = "ForbiddenError"
-        this.code = "FORBIDDEN_ERROR"
+        this.errorCode = "FORBIDDEN_ERROR"
+        this.statusCode = 403
         this.author = author ? author : 'non-author'
-        this.message = JSON.stringify({
-            status: 403,
-            code: "FORBIDDEN_ERROR",
-            message: message
-        })
+        this.message = message
         if(save) this.save()
     }
 
     save(){
         errorCreateOneService({
+            statusCode: this.statusCode,
+            errorCode: this.errorCode,
             author: this.author,
             name: this.name,
             stack: this.stack,

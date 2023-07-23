@@ -23,14 +23,15 @@ type PaginateUser {
 type Query {
     userFindById(id: ID!): User
     userFetch: [User]
-    userPaginate(input: PaginateInput): PaginateUser
-    loguinUser(input: LoginInput): String
+    userPaginate(input: PaginateUsersInput!): PaginateUser
+    loginUser(input: LoginInput!): String
 }
 
 type Mutation {
     userUpdate(id: ID!, upgrade: UpdateUserInput!): User
     userDeleteById(id: ID!): User
     userCreateOne(input: UserInput): User
+    registerUser(input: UserInput): User
 }
 
 input LoginInput {
@@ -39,16 +40,16 @@ input LoginInput {
     password: String!
 }
 
-input PaginateInput {
+input PaginateUsersInput {
     pageNumber: Int
     itemsPerPage: Int
     search: String
-    filters: [FilterInput]
+    filters: [FilterUsersInput]
     orderBy: String
     orderDesc: Boolean
 }
 
-input FilterInput {
+input FilterUsersInput {
     id: ID
     username: String
     email: String

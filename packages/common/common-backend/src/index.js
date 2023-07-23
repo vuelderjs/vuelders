@@ -14,7 +14,15 @@ import {
     NotFoundError,
     TimeoutError,
     UnauthorizedError,
-    ValidationError
+    ValidationError,
+    errorFindService,
+    errorFindByIdService,
+    errorPaginateService,
+    errorFetchService,
+    errorUpdateService,
+    errorDeleteByIdService,
+    errorCreateOneService,
+    types, resolvers
 } from './modules/error/index.js'
 
 export {
@@ -33,5 +41,13 @@ export {
     NotFoundError,
     TimeoutError,
     UnauthorizedError,
-    ValidationError
+    ValidationError,
+    errorFindService,
+    errorFindByIdService,
+    errorPaginateService,
+    errorFetchService,
+    errorUpdateService,
+    errorDeleteByIdService,
+    errorCreateOneService,
+    types, resolvers
 }

@@ -1,0 +1,49 @@
+type Error {
+    id: ID!
+    author: String!
+    name: String!
+    message: String!
+    stack: String!
+    status: String!
+    statusCode: String!
+    errorCode: String!
+}
+
+type PaginateErrors {
+    docs: [Error!]
+    totalDocs: Int!
+    limit: Int!
+    totalPages: Int!
+    page: Int!
+    hasPrevPage: Boolean!
+    hasNextPage: Boolean!
+}
+
+type Query {
+    errorsPaginate(input: PaginateErrorInput!): PaginateErrors
+    errorsFindById(id: ID!): Error
+}
+
+type Mutation {
+    errorsUpdateStatus(id: ID!, status: String!): Error
+}
+
+input PaginateErrorInput {
+    pageNumber: Int
+    itemsPerPage: Int
+    search: String
+    filters: [FilterErrorInput]
+    orderBy: String
+    orderDesc: Boolean
+}
+
+input FilterErrorInput {
+    id: ID
+    author: String
+    name: String
+    message: String
+    stack: String
+    status: String
+    statusCode: String
+    errorCode: String
+}

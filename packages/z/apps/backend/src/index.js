@@ -2,7 +2,8 @@ import GraphqlServer from './apollo-server.js';
 import { types, resolvers } from './modules-merge.js'
 import dotenv from 'dotenv'
 import { mongoConnect } from './mongo-db.js';
-import {init} from './init/index.js'
+
+import { init } from './init/index.js'
 
 dotenv.config()
 

@@ -1,0 +1,12 @@
+query errorsFindById($id: ID!){
+    errorsFindById(id: $id){
+        id
+        author
+        name
+        message
+        stack
+        status
+        statusCode
+        errorCode
+    }
+}

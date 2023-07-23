@@ -9,7 +9,6 @@ class ErrorServices extends BaseService {
 
 export const {
     find : errorFindService,
-    findOne : errorFindOneService,
     findById : errorFindByIdService,
     paginate: errorPaginateService,
     fetch: errorFetchService,

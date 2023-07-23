@@ -1,0 +1,6 @@
+mutation errorsUpdateStatus($id: ID!, $status: String!){
+    errorsUpdateStatus(id: $id, status: $status){
+        id
+        status
+    }
+}

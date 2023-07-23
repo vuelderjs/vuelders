@@ -64,7 +64,7 @@ test('BaseService testing', async (t) => {
     await t.test('test_create_one_valid_doc', async () => {
         const expectedResult = { id: 1, name: 'John Doe' }
         const repository = {
-            createOne: () => expectedResult
+            create: () => expectedResult
         }
         const service = new BaseService(repository)
         const result = await service.createOne({ name: 'John Doe' })

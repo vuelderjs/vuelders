@@ -1,79 +1,78 @@
 
 
 class BaseService {
-    static #repository
-    static #filters
-
     constructor(repository, filters){
-        BaseService.#repository = repository
-        BaseService.#filters = filters ? filters : query => query
-    }
+        
+        if(!repository) throw new Error('Base Service must need a repository at first parameter.')
 
-    async findById(id){
-        try {
-            return await BaseService.#repository.findById(id)
-        } catch (error) {
-            throw error
-        }
-    }
+        filters = filters ? filters : query => query
 
-    async find(query){
-        try {
-            return await BaseService.#repository.find(query)
-        } catch (error) {
-            throw error   
-        }
-    }
-
-    async paginate({pageNumber = 1, itemsPerPage = 5, search = null, filters = null, orderBy = null, orderDesc = false}){
-        try {
-            const options = {
-                page: pageNumber,
-                limit: itemsPerPage,
-                sort: orderBy ? { [orderBy]: orderDesc ? - 1 : 1 } : null
+        this.findById = async (id) => {
+            try {
+                return await repository.findById(id)
+            } catch (error) {
+                throw error
             }
-    
-            let query = {}
-    
-            if (search){
-                query.value = { $regex: search, $options: 'i'  }
+        }
+
+        this.find = async (query) => {
+            try {
+                return await repository.find(query)
+            } catch (error) {
+                throw error   
             }
-    
-            return await BaseService.#repository.paginate(query, options)
-        } catch (error) {
-            throw error
         }
-    }
 
-    async fetch(){
-        try {
-            return await BaseService.#repository.find({})
-        } catch (error) {
-            throw error
+        this.paginate = async ({pageNumber = 1, itemsPerPage = 5, search = null, filters = null, orderBy = null, orderDesc = false}) => {
+            try {
+                const options = {
+                    page: pageNumber,
+                    limit: itemsPerPage,
+                    sort: orderBy ? { [orderBy]: orderDesc ? - 1 : 1 } : null
+                }
+        
+                let query = {}
+        
+                if (search){
+                    query.value = { $regex: search, $options: 'i'  }
+                }
+        
+                return await repository.paginate(query, options)
+            } catch (error) {
+                throw error
+            }
         }
-    }
 
-    async update(id, upgrade){
-        try {
-            return await BaseService.#repository.findByIdAndUpdate(id, upgrade)
-        } catch (error) {
-            throw error
+        this.fetch = async () => {
+            try {
+                return await repository.find({})
+            } catch (error) {
+                throw error
+            }
         }
-    }
 
-    async deleteById(id){
-        try {
-            return await BaseService.#repository.findByIdAndDelete(id)
-        } catch (error) {
-            throw error
+        this.update = async (id, upgrade) => {
+            try {
+                return await repository.findByIdAndUpdate(id, upgrade)
+            } catch (error) {
+                throw error
+            }
         }
-    }
 
-    async createOne(doc){
-        try {
-            return await BaseService.#repository.create(doc)
-        } catch (error) {
-            throw error
+        this.deleteById = async (id) => {
+            try {
+                return await repository.findByIdAndDelete(id)
+            } catch (error) {
+                throw error
+            }
+        }
+
+        this.createOne = async (doc) => {
+            try {
+                return await repository.create(doc)
+            } catch (error) {
+                throw error
+            }
         }
     }
 }

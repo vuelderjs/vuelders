@@ -8,12 +8,24 @@ const UserSchema = new Schema({
     username:{
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: {
+            validator: function(value){
+                return /^[A-Za-z0-9]+$/.test(value)
+            },
+            message: props => `${props.value} is not a valid username.`
+        }
     },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: {
+            validator: function(value){
+                return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
+            },
+            message: props => `${props.value} is not a valid email.`
+        }
     },
     password: {
         type: String,
@@ -23,7 +35,13 @@ const UserSchema = new Schema({
     completeName: {
         type: String,
         required: false,
-        unique: false
+        unique: false,
+        validate: {
+            validator: function(value){
+                return /^[A-Za-z\s]+$/.test(value)
+            },
+            message: props => `${props.value} is not a valid complete name.`
+        }
     },
     dateBirth: {
         type: Date,
@@ -37,7 +55,9 @@ const UserSchema = new Schema({
     },
     role: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Role'
+        ref: 'Role',
+        required: false,
+        unique: false
     }
 }, {
     timestamps: true,

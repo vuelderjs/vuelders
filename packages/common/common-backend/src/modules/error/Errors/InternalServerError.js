@@ -4,18 +4,17 @@ class InternalServerError extends Error {
     constructor({message, author, save = false}) {
         super(message)
         this.name = "InternalServerError"
-        this.code = "INTERNAL_SERVER_ERROR"
+        this.errorCode = "INTERNAL_SERVER_ERROR"
         this.author = author ? author : 'non-author'
-        this.message = JSON.stringify({
-            status: 500,
-            code: "INTERNAL_SERVER_ERROR",
-            message: message
-        })
+        this.statusCode = 500
+        this.message = message
         if(save) this.save()
     }
 
     save(){
         errorCreateOneService({
+            statusCode: this.statusCode,
+            errorCode: this.errorCode,
             author: this.author,
             name: this.name,
             stack: this.stack,

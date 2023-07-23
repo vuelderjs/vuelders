@@ -4,18 +4,17 @@ class ConflictError extends Error {
     constructor({message, author, save = false}) {
         super(message)
         this.name = "ConflictError"
-        this.code = "CONFLICT_ERROR"
+        this.errorCode = "CONFLICT_ERROR"
+        this.statusCode = 409
         this.author = author ? author : 'non-author'
-        this.message = JSON.stringify({
-            status: 409,
-            code: "CONFLICT_ERROR",
-            message: message
-        })
+        this.message = message
         if(save) this.save()
     }
 
     save(){
         errorCreateOneService({
+            statusCode: this.statusCode,
+            errorCode: this.errorCode,
             author: this.author,
             name: this.name,
             stack: this.stack,

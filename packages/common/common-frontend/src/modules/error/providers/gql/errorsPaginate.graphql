@@ -1,0 +1,20 @@
+query errorsPaginate($input: PaginateErrorInput!){
+    errorsPaginate(input: $input){
+        docs {
+            id
+            author
+            name
+            message
+            stack
+            status
+            statusCode
+            errorCode
+        }
+        totalDocs
+        limit
+        totalPages
+        page
+        hasPrevPage
+        hasNextPage
+    }
+}

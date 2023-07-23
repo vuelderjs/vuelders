@@ -3,11 +3,22 @@ import mongoosePaginate from 'mongoose-paginate-v2'
 
 const ErrorSchema = mongoose.Schema({
     author: {
-        type: mongoose.Types.ObjectId,
-        ref: 'users',
+        type: String,
+        required: true,
+        unique: false
     },
     name: {
         type: String,
+        required: true,
+        unique: false
+    },
+    errorCode: {
+        type: String,
+        required: true,
+        unique: false
+    },
+    statusCode: {
+        type: Number,
         required: true,
         unique: false
     },
@@ -20,6 +31,13 @@ const ErrorSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: false
+    },
+    status: {
+        type: String,
+        enum: ['UNRESOLVED', 'FIXING', 'RESOLVED'],
+        required: true,
+        unique: false,
+        default: 'UNRESOLVED'
     }
 })
 

@@ -9,7 +9,8 @@ import {
     userUpdateService as updateService,
     userDeleteByIdService as deleteByIdService,
     userCreateOneService as createOneService,
-    loguinUserService
+    loginUserService,
+    registerUserService
 } from '../../services/UserServices.js'
 
 import {
@@ -26,19 +27,18 @@ class UserQueries extends BaseQueries{
         super('user', {findByIdService, paginateService, fetchService}, {findByIdMiddleware, paginateMiddleware, fetchMiddleware})
     }
     
-    async loguinUser(_, {input: {email = null, username = null, password = null } }){
-        try {
-            return await loguinUserService({email, username, password})
-        } catch (error) {
-            if(!(error instanceof InternalServerError)) throw error
-            throw new InternalServerError({message: error.message, save: true})
-        }
+    async loginUser(_, {input: {email = null, username = null, password = null } }){
+        return await loginUserService({email, username, password})
     }
 }
 
 class UserMutations extends BaseMutations{
     constructor(){
         super('user', {updateService, deleteByIdService, createOneService}, {updateMiddleware, deleteByIdMiddleware, createOneMiddleware})
+    }
+
+    async registerUser(_, {input: {username, email, password, completeName = null, dateBirth = null, phone = null}}){
+        return await registerUserService({username, email, password, completeName, dateBirth, phone})
     }
 }
 

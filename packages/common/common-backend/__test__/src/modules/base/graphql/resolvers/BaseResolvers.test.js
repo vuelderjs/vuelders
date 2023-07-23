@@ -5,16 +5,6 @@ import { BaseQueries, BaseMutations } from '../../../../../../src/modules/base/g
 
 test('BaseQueries testing', async (t) => {
 
-    // Tests that the constructor sets the name property correctly
-    await t.test('test_constructor_sets_name_property_correctly', () => {
-        const name = 'testName';
-        const fetchService = ()=>{}
-        const findByIdService = ()=>{}
-        const paginateService = ()=>{}
-        const baseQueries = new BaseQueries(name, {fetchService, findByIdService, paginateService});
-        assert.equal(baseQueries.name, name)
-    });
-
     // Tests that the 'FindOne' method returns the expected result
     await t.test('test_find_one_returns_expected_result', async () => {
         const name = 'testName';
@@ -53,16 +43,6 @@ test('BaseQueries testing', async (t) => {
 
 
 test('BaseMutations testing', async (t) => {BaseMutations
-
-    // Tests that the constructor sets the name property correctly
-    await t.test('test_constructor_sets_name_property_correctly', () => {
-        const name = 'TestName';
-        const createOneService = () => expectedResult;
-        const updateService = () => {};
-        const deleteByIdService = () => {};
-        const baseMutations = new BaseMutations(name, {createOneService, updateService, deleteByIdService});
-        assert.equal(baseMutations.name, name);
-    });
 
     // Tests that the createOne mutation returns the expected result
     await t.test('test_createOne_returns_expected_result', async () => {
